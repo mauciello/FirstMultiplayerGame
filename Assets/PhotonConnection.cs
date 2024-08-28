@@ -6,7 +6,7 @@ using Photon.Realtime;
 
 public class PhotonConnection : MonoBehaviourPunCallbacks
 {
-    
+       
     void Start()
     {
         PhotonNetwork.ConnectUsingSettings();
@@ -27,6 +27,7 @@ public class PhotonConnection : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
         print("Se entró al room");
+        PhotonNetwork.Instantiate("Player", new Vector3(0,0,0), Quaternion.identity);
     }
 
     public override void OnCreateRoomFailed(short returnCode, string message)
