@@ -36,4 +36,16 @@ public class PlayerController : MonoBehaviour
             rb.MovePosition(rb.position + movement * movSpeed * Time.deltaTime);
         }        
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Coin"))
+        {
+            Destroy(collision.gameObject);
+        }
+
+        //m_PV.RPC("addPointsInUI", RpcTarget.AllBuffered,5);
+    }
+
+    
 }
