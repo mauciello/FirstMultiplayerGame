@@ -5,11 +5,14 @@ using Photon.Pun;
 
 public class SpawnerManager : MonoBehaviour
 {
-    [SerializeField] Transform m_spawner1;
+    [SerializeField] Transform[] spawnPoints; 
 
     private void Start()
     {
-        PhotonNetwork.Instantiate("Player", m_spawner1.position, Quaternion.identity);
+        int randomIndex = Random.Range(0, spawnPoints.Length);
+        Vector3 randomPosition = spawnPoints[randomIndex].position;
+
+        PhotonNetwork.Instantiate("Player", randomPosition, Quaternion.identity);
     }
 }
 

@@ -10,9 +10,11 @@ public class PhotonConnection : MonoBehaviourPunCallbacks
 {
 
     [SerializeField] TMP_InputField m_newInputField;
+    [SerializeField] TMP_Text errorText;
     void Start()
     {
         PhotonNetwork.ConnectUsingSettings();
+        errorText.text = "";
     }
 
     public override void OnConnectedToMaster()
@@ -39,12 +41,14 @@ public class PhotonConnection : MonoBehaviourPunCallbacks
     {
         base.OnCreateRoomFailed(returnCode, message);
         print("Hubo un error al crear un room: " + message);
+        errorText.text = "Error al crear el room: " + message;
     }
 
     public override void OnJoinRoomFailed(short returnCode, string message)
     {
         base.OnJoinRoomFailed(returnCode, message);
         print("Hubo un error al entrar un room: " + message);
+        errorText.text = "Error al unirse a ese room: " + message;
     }
 
     RoomOptions newRoomInfo()
