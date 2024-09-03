@@ -9,6 +9,8 @@ public class UIManager : MonoBehaviour
     public static UIManager instance;
 
     [SerializeField] TextMeshProUGUI m_TextMeshProUGUI;
+
+    PhotonView m_PV;
     int m_currentScore;
 
     private void Awake()
@@ -32,12 +34,17 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         m_TextMeshProUGUI.text = "Score: ";
+        m_PV = GetComponent<PhotonView>();
     }
 
-    //[PunRPC]
-    //void addPointsInUI(int p_newScore)
-    //{
-    //    UIManager.instance.actualizarText(p_newScore);
-    //}
+    public void addNewPoints()
+    {
+        m_PV.RPC("addPointsInUI", RpcTarget.AllBuffered, 5);
+    }
 
+    [PunRPC]
+    void addNewPointsInUI(int p_newScore)
+    {
+        actualizarText(p_newScore);
+    }
 }

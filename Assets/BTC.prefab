@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3814168388838503091}
   - component: {fileID: -8236887555642734825}
   - component: {fileID: -9026999586082400003}
+  - component: {fileID: -2045446140607868103}
   m_Layer: 0
   m_Name: BTC
   m_TagString: Coin
@@ -161,3 +162,15 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 1
+--- !u!114 &-2045446140607868103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1026661388785662743}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f9ec98cc0b309a46b2afde4f72cd08f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

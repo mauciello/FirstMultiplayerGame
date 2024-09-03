@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Photon.Pun;
+using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField] TextMeshProUGUI m_NicknameUI;
+
     public float movSpeed = 5f;
    
     public Rigidbody2D rb;
@@ -19,6 +22,8 @@ public class PlayerController : MonoBehaviour
     {
         m_PV = GetComponent<PhotonView>();
         rb = GetComponent<Rigidbody2D>();
+
+        m_NicknameUI.text = m_PV.Owner.NickName;
     }
 
     // Update is called once per frame
@@ -41,11 +46,8 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.CompareTag("Coin"))
         {
-            Destroy(collision.gameObject);
+            UIManager.instance.addNewPoints();
+            //Destroy(collision.gameObject);
         }
-
-        //m_PV.RPC("addPointsInUI", RpcTarget.AllBuffered,5);
     }
-
-    
 }
