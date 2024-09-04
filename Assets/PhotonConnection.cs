@@ -10,7 +10,9 @@ public class PhotonConnection : MonoBehaviourPunCallbacks
 {
 
     [SerializeField] TMP_InputField m_newInputField;
+    [SerializeField] TMP_InputField m_newNickName;
     [SerializeField] TMP_Text errorText;
+ 
     void Start()
     {
         PhotonNetwork.ConnectUsingSettings();
@@ -25,8 +27,6 @@ public class PhotonConnection : MonoBehaviourPunCallbacks
 
     public override void OnJoinedLobby()
     {
-        print("Se ha entrado al Lobby Abstracto");
-        
         //PhotonNetwork.JoinOrCreateRoom("TestRoom1", newRoomInfo(), null);
     }
 
@@ -63,11 +63,25 @@ public class PhotonConnection : MonoBehaviourPunCallbacks
 
     public void joinRoom()
     {
+        print("Se ha entrado al Lobby Abstracto");
+        if (m_newNickName.text == null)
+        {
+            print("Se necesita un nombre");
+            return;
+        }
+        PhotonNetwork.NickName = m_newNickName.text;
         PhotonNetwork.JoinRoom(m_newInputField.text);
     }
 
     public void createRoom()
     {
+        print("Se ha entrado al Lobby Abstracto");
+        if (m_newNickName.text == null)
+        {
+            print("Se necesita un nombre");
+            return;
+        }
+        PhotonNetwork.NickName = m_newNickName.text;
         PhotonNetwork.CreateRoom(m_newInputField.text, newRoomInfo(), null);
     }
 }

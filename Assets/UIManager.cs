@@ -37,9 +37,14 @@ public class UIManager : MonoBehaviour
         m_PV = GetComponent<PhotonView>();
     }
 
+    public void leaveCurrentRoomFromEditor()
+    {
+        LNM.instance.disconnectFromCurrentRoom();
+    }
+
     public void addNewPoints()
     {
-        m_PV.RPC("addPointsInUI", RpcTarget.AllBuffered, 5);
+        m_PV.RPC("addNewPointsInUI", RpcTarget.AllBuffered, 5);
     }
 
     [PunRPC]

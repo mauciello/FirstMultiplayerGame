@@ -44,10 +44,14 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Coin"))
+        if (m_PV.IsMine)
         {
-            UIManager.instance.addNewPoints();
-            //Destroy(collision.gameObject);
+            if (collision.CompareTag("Coin"))
+            {
+                UIManager.instance.addNewPoints();
+                //Destroy(collision.gameObject);
+            }
         }
+        
     }
 }
