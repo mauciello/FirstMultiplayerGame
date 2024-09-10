@@ -12,14 +12,11 @@ public class PhotonConnection : MonoBehaviourPunCallbacks
     [SerializeField] TMP_InputField m_newInputField;
     [SerializeField] TMP_InputField m_newNickName;
     [SerializeField] TMP_Text errorText;
-    [SerializeField] timerscript timerScript;
-    private bool gameStarted = false;
  
     void Start()
     {
         PhotonNetwork.ConnectUsingSettings();
         errorText.text = "";
-        timerScript.enabled = false;
         
     }
 
@@ -38,20 +35,8 @@ public class PhotonConnection : MonoBehaviourPunCallbacks
     {
         print("Se entró al room");
         //PhotonNetwork.Instantiate("Player", new Vector3(0,0,0), Quaternion.identity);
-
-        if(PhotonNetwork.CurrentRoom.PlayerCount >= 2)
-        {
-            print("Comienza el timer antes de que se pueda mover el jugador");
-        }
         PhotonNetwork.LoadLevel("SampleScene");
     }
-
-    void StartGameCountdown()
-    {
-        timerScript.timer = 3f;
-        timerScript.enabled = true;
-    }
-
     public override void OnCreateRoomFailed(short returnCode, string message)
     {
         base.OnCreateRoomFailed(returnCode, message);
@@ -102,11 +87,4 @@ public class PhotonConnection : MonoBehaviourPunCallbacks
         PhotonNetwork.CreateRoom(m_newInputField.text, newRoomInfo(), null);
     }
 
-    void Update()
-    {
-        if(timerScript.timer <= 0 && !gameStarted)
-        {
-            gameStarted = true;
-        }
-    }
 }

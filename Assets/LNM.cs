@@ -7,6 +7,7 @@ using Photon.Realtime;
 public class LNM : MonoBehaviourPunCallbacks
 {
     public static LNM instance;
+    PhotonView m_PV;
 
     private void Awake()
     {
@@ -17,6 +18,9 @@ public class LNM : MonoBehaviourPunCallbacks
         {
             Destroy(instance);
         }
+
+        m_PV = GetComponent<PhotonView>();
+
     }
 
     public void disconnectFromCurrentRoom()
@@ -39,7 +43,6 @@ public class LNM : MonoBehaviourPunCallbacks
     public override void OnPlayerLeftRoom(Player otherPlayer)
     {
         print("Salio el player: " + otherPlayer.NickName);
-    }
 
-    
+    }
 }

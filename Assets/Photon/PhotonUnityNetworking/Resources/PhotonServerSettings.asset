@@ -41,6 +41,9 @@ MonoBehaviour:
   - RespawnSpaceship
   - addPointsInUI
   - addNewPointsInUI
+  - showNewGameInfo
+  - noMoreCoinsmessage
+  - noMoreCoinsMessage
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 0
