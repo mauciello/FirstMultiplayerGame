@@ -40,4 +40,6 @@ public class LNM : MonoBehaviourPunCallbacks
     {
         print("Salio el player: " + otherPlayer.NickName);
     }
+
+    
 }

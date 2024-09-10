@@ -12,11 +12,15 @@ public class PhotonConnection : MonoBehaviourPunCallbacks
     [SerializeField] TMP_InputField m_newInputField;
     [SerializeField] TMP_InputField m_newNickName;
     [SerializeField] TMP_Text errorText;
+    [SerializeField] timerscript timerScript;
+    private bool gameStarted = false;
  
     void Start()
     {
         PhotonNetwork.ConnectUsingSettings();
         errorText.text = "";
+        timerScript.enabled = false;
+        
     }
 
     public override void OnConnectedToMaster()
@@ -34,7 +38,18 @@ public class PhotonConnection : MonoBehaviourPunCallbacks
     {
         print("Se entró al room");
         //PhotonNetwork.Instantiate("Player", new Vector3(0,0,0), Quaternion.identity);
+
+        if(PhotonNetwork.CurrentRoom.PlayerCount >= 2)
+        {
+            print("Comienza el timer antes de que se pueda mover el jugador");
+        }
         PhotonNetwork.LoadLevel("SampleScene");
+    }
+
+    void StartGameCountdown()
+    {
+        timerScript.timer = 3f;
+        timerScript.enabled = true;
     }
 
     public override void OnCreateRoomFailed(short returnCode, string message)
@@ -54,7 +69,7 @@ public class PhotonConnection : MonoBehaviourPunCallbacks
     RoomOptions newRoomInfo()
     {
         RoomOptions roomOptions = new RoomOptions();
-        roomOptions.MaxPlayers = 10;
+        roomOptions.MaxPlayers = 6;
         roomOptions.IsOpen = true;
         roomOptions.IsVisible = true;
 
@@ -64,9 +79,10 @@ public class PhotonConnection : MonoBehaviourPunCallbacks
     public void joinRoom()
     {
         print("Se ha entrado al Lobby Abstracto");
-        if (m_newNickName.text == null)
+        if (m_newNickName.text == "")
         {
             print("Se necesita un nombre");
+            errorText.text = "Error: Se necesita un Nickname";
             return;
         }
         PhotonNetwork.NickName = m_newNickName.text;
@@ -76,12 +92,21 @@ public class PhotonConnection : MonoBehaviourPunCallbacks
     public void createRoom()
     {
         print("Se ha entrado al Lobby Abstracto");
-        if (m_newNickName.text == null)
+        if (m_newNickName.text == "")
         {
             print("Se necesita un nombre");
+            errorText.text = "Error: Se necesita un Nickname";
             return;
         }
         PhotonNetwork.NickName = m_newNickName.text;
         PhotonNetwork.CreateRoom(m_newInputField.text, newRoomInfo(), null);
+    }
+
+    void Update()
+    {
+        if(timerScript.timer <= 0 && !gameStarted)
+        {
+            gameStarted = true;
+        }
     }
 }
